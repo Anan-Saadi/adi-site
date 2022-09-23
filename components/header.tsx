@@ -87,11 +87,6 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   const items = links.map((link) => (
     <Link
       href={`/${link.link}`}
-      onClick={(event) => {
-       //event.preventDefault();
-        //setActive(link.link);
-        //close();
-      }}
     >
       <div className={cx(classes.link, { [classes.linkActive]: active === link.link })}>
       {link.label}

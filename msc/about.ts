@@ -1,4 +1,4 @@
-export const fuck= `On a summery day, July 7th, 1993, while my family members were in a nearby pool I was born into a wave full of warm colors.
+export const bio= (`On a summery day, July 7th, 1993, while my family members were in a nearby pool I was born into a wave full of warm colors.
 Twenty-nine years full of positive energy define me most.
 
  at the age of 4, I touched my mother's clothes for the first time; at the age of 5, I put on a show wearing my older sister's clothes and at 6 I tried to reach an interesting piece out of my father's poor sweater by cutting and coloring it.
@@ -31,5 +31,5 @@ Hope you like my page
 
 ​
 
-With love <3 `;
+With love <3 `);
 

@@ -20,6 +20,18 @@ a {
     text-decoration: none;
 }
 
+div {
+    white-space: pre-wrap;
+}
+
+
+/* image {
+    flex: 1;
+    width: null;
+    height: null;
+    resizeMode: 'contain'
+} */
+
 * {
     box-sizing: border-box;
 }
