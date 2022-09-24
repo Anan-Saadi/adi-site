@@ -6,7 +6,7 @@ export default function About() {
     return (
         <Stack>
             <Center>
-                <h1>
+                <h1>     
                     Meet Adi Saadya
                 </h1>
             </Center>

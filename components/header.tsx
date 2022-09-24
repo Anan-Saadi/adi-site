@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { createStyles, Header, Container, Group, Burger, Paper, Transition } from '@mantine/core';
+import { createStyles, Header, Container, Group, Burger, Paper, Transition, Text } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo, GithubIcon } from '@mantine/ds';
 import Link from 'next/link';
 
 const HEADER_HEIGHT = 60;
 
-const Styles = createStyles((theme) => ({
+const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
     zIndex: 1,
@@ -75,37 +74,52 @@ const Styles = createStyles((theme) => ({
   },
 }));
 
+
 interface HeaderResponsiveProps {
   links: { link: string; label: string }[];
 }
 
 export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   const [opened, { toggle, close }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
-  const { classes, cx } = Styles();
+  const [active, setActive] = useState("");
+  const { classes, cx } = useStyles();
 
   const items = links.map((link) => (
-    <Link
-      href={`/${link.link}`}
-    >
-      <div className={cx(classes.link, { [classes.linkActive]: active === link.link })}>
-      {link.label}
-      </div>
+    <Link href={`/${link.link}`}>
+      <a>
+        <Container className={cx(classes.link, { [classes.linkActive]: active === link.link })}
+          onClick={() => {
+            setActive(link.link);
+          }}>
+          <Text weight={600} size={18}>
+            {link.label}
+
+          </Text>
+
+        </Container>
+      </a>
+
     </Link>
-    
-    
+
+
   ));
 
   return (
     <Header height={HEADER_HEIGHT} mb={-60} className={classes.root}>
       <Container className={classes.header}>
         <Container>
-          <a href="/maria">Maria</a>
+          <Link href="/">
+            <a>
+              <Text weight={600} size={30}>
+                Maria
+
+              </Text>
+            </a>
+
+          </Link>
         </Container>
-        <Container>
-          
-        </Container>
-      
+        <Container size="xl" />
+
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

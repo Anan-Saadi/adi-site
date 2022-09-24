@@ -1,41 +1,32 @@
-import {
-  AppShell,
-  Navbar,
-  Header,
-  Footer,
-  Aside,
-  Text,
-  MediaQuery,
-  Collapse,
-  Burger,
-  useMantineTheme,
-  Container,
-  Group,
-  Button,
-  Transition,
-  Paper,
-} from '@mantine/core'
+
 import { useDisclosure } from '@mantine/hooks'
 import { MantineLogo, GithubIcon } from '@mantine/ds';
 import { DiffieHellmanGroup } from 'crypto'
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { useState } from 'react'
-import styles from '../styles/Home.module.css'
-import { HeaderResponsive } from '../components/header';
-
-
+import { Stack,Image, Center,Text, Space } from "@mantine/core";
+import {maria} from "../../adi/msc/about"
 
 const Home: NextPage = () => {
  
   
 
   return (
-    <div>
-hello
-    </div>
-      
+    <Stack align="center">
+    <Space h={30}/>
+        
+    
+    <Center>
+    <Image src="/maria.jpg" width={477} height={642}/>
+   
+ 
+    </Center>
+    <Text>
+        {maria}
+    </Text>
+    <Space h={30}/>
+
+
+</Stack>
 
   )
 }

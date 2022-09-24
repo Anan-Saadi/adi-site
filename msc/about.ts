@@ -33,3 +33,15 @@ Hope you like my page
 
 With love <3 `);
 
+export const maria = (`Hello 
+
+I am Maria, and I'm going to be your conceptual model,  and designer. 
+
+One who follows the crowd will usually go no further than the crowd, and i don't. 
+
+You can learn a lot not because of choices but because of situations.
+
+I felt that deep down inside I'm an artist and never used my potential. 
+
+But time went by... and now I am ready to make a S T A T E M E N T.`) ;
+
