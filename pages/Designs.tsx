@@ -1,29 +1,23 @@
-import { Card, CardSection, Grid, Image, Stack, Text, AspectRatio, Group, Center, Space, Container } from "@mantine/core";
+import { Card, CardSection, Grid, Stack, Text, AspectRatio, Image, Group, Center, Space, Container } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
+import Link from "next/link";
+import { getAllPosts } from "../lib/firenase";
 
-export default function Desgins() {
+
+export default function Desgins({ posts }: any) {
 
 
     return (
         <Stack>
             <Space h={30} />
-            <Group>
-                {/* <Space w={1000} /> */}
-                <Grid justify="center" gutter="xl">
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigasfkga")}
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigaddddddddddddddddsfkga")}
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigasfkga")}
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigasfkga ")}
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigaddddd\ndddaaaaaaaaaaaaaaaaaaaaaaaaaddddddddsfkga")}
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigasfkga")}
-                    {card("adi.jpg", "hello", "more ahsdugasgkikluigasfkga")}
+            <Grid justify="center" gutter={0}>
+                {
+                    posts.map((post: any) => card("esign.jpg", post.title, post.text, post.title))
+                }
 
 
+            </Grid>
 
-                </Grid>
-                {/* <Space w={100} /> */}
-
-            </Group>
 
         </Stack>
 
@@ -31,45 +25,67 @@ export default function Desgins() {
 }
 
 
-function card(imageSrc?: string, title?: string, summery?: string) {
+function card(imageSrc: string, title: string, summery: string, Id: string) {
     const span: number = useMediaQuery('(min-width: 900px)') ? 4 : 10;
 
     return (
-        <Grid.Col span={span}>
+
+        <Grid.Col span={span} onClick={() => { console.log("clicked"); }}>
             <Center>
-                <Card radius="lg" withBorder>
+                <Link href={{ pathname: Id, query: { title: title, text: summery } }}>
 
-                    <CardSection>
-                        <Image src={imageSrc} fit="fill" />
+                    <Card radius="lg" withBorder>
+
+                        <CardSection>
+                            <Image src={imageSrc} height={650} />
 
 
-                    </CardSection>
+                        </CardSection>
 
-                    <CardSection>
-                        <Center>
-                            <Text weight="bold">
-                                {title}
-                            </Text>
-                        </Center>
-
-                    </CardSection>
-                    <CardSection>
-                        <Center>
-                            <Container>
-                                <Text color="dimmed" size="lg" >
-                                    {summery}
+                        <CardSection>
+                            <Center>
+                                <Text weight="bold">
+                                    {title}
                                 </Text>
-                            </Container>
+                            </Center>
 
-                        </Center>
+                        </CardSection>
+                        <CardSection>
+                            <Center>
+                                <Container>
+                                    <Text color="dimmed" size="lg" >
+                                        {summery}
+                                    </Text>
+                                </Container>
 
-                    </CardSection>
+                            </Center>
+
+                        </CardSection>
 
 
-                </Card>
+
+                    </Card>
+
+                </Link>
+
             </Center>
+            <Space h={40}/>
+
 
         </Grid.Col>
 
+
     );
+}
+export async function getStaticProps() {
+    // Call an external API endpoint to get posts
+    const posts = (await getAllPosts());
+
+    // By returning { props: { posts } }, the Blog component
+    // will receive `posts` as a prop at build time
+    return {
+        props: {
+            posts,
+        },
+    }
 }

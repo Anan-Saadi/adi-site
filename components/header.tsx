@@ -90,6 +90,8 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
         <Container className={cx(classes.link, { [classes.linkActive]: active === link.link })}
           onClick={() => {
             setActive(link.link);
+            close();
+            
           }}>
           <Text weight={600} size={18}>
             {link.label}
@@ -104,8 +106,8 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
 
   ));
 
-  return (
-    <Header height={HEADER_HEIGHT} mb={-60} className={classes.root}>
+  return (  
+    <Header height={HEADER_HEIGHT} mb={-60} className={classes.root} >
       <Container className={classes.header}>
         <Container>
           <Link href="/">
