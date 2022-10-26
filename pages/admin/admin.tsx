@@ -1,24 +1,51 @@
-//import RichTextEditor from '../../components/RichText';
+import RichTextEditor from '../../components/RichText';
 
-import RichTextEditor from '@mantine/rte';
-import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { Button } from '@mantine/core';
+import { storage } from '../../lib/firebase';
 
-export default dynamic(() => import('@mantine/rte'), {
-    // Disable during server side rendering
-    ssr: false,
+const  handleImageUpload = useCallback(
+
+
+    (file:File): Promise<string> =>
+      new Promise((resolve, reject) => {
   
-    // Render anything as fallback on server, e.g. loader or html content without editor
-    loading: () => null,
-  });
+        var postImage = storage.child('images/post.jpg');
+  
+        const formData = new FormData();
+        formData.append('image', file);
+  
+        //postImage.put(file).then((result)=> console.log(result)).then((Response)=> resolve(Response))
+        
+        fetch('https://api.imgbb.com/1/upload?key=api_key', {
+          method: 'POST',
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((result) => resolve(result.data.url))
+          .catch(() => reject(new Error('Upload failed')));
+       }
+      ),
+    []
+  );
+  
 
-export function Admin() {
-    const initialValue = 'sadasdasd';
+export default function Admin() {
+    const initialValue = '<h1>hello,</h1><p>my name is <em>anan </em><strong><em>saadi</em></strong></p>';
     const [value, onChange] = useState(initialValue);
 
+
     return (
-        <RichTextEditor value={"hhhh"} onChange={onChange} id="rte" />
+        <>
+            <RichTextEditor value={value} onChange={onChange} />
+            <Button onClick={() => console.log(value)} />
+        </>
+
     );
 
 }
+
+
+
+
 

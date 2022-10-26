@@ -3,13 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, getDocs  } from "firebase/firestore";
 import 'firebase/compat/firestore';
 import firebase from 'firebase/compat/app';
+import 'firebase/compat/storage';
+
 
 import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { useCallback } from "react";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCzu9J9kTEp6uwYBU2Uc8jShVZ8E7POpoY",
   authDomain: "adi-sadi.firebaseapp.com",
@@ -24,10 +23,13 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.firestore();
+export const storage = firebase.storage().ref();
+
 
 export async function getAllPosts() {
   const ref = firestore.collection('posts').limit(5);
   const result =  (await ref.get());
+
   let response: firebase.firestore.DocumentData[] = [];
 
   result.forEach(doc => {
@@ -36,6 +38,5 @@ export async function getAllPosts() {
   return response
 
 }
-
 
 

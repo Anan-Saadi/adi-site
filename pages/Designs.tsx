@@ -1,7 +1,7 @@
 import { Card, CardSection, Grid, Stack, Text, AspectRatio, Image, Group, Center, Space, Container } from "@mantine/core";
 import { useMediaQuery } from "@mantine/hooks";
 import Link from "next/link";
-import { getAllPosts } from "../lib/firenase";
+import { getAllPosts } from "../lib/firebase";
 
 
 export default function Desgins({ posts }: any) {
