@@ -1,47 +1,80 @@
 import RichTextEditor from '../../components/RichText';
 
-import { useCallback, useState } from 'react';
+
+
+
+
+import { Container, Space, Stack, TextInput } from '@mantine/core';
+
+import { useCallback, useMemo, useState } from 'react';
 import { Button } from '@mantine/core';
-import { storage } from '../../lib/firebase';
-
-const  handleImageUpload = useCallback(
+import { storage, uploadPost } from '../../lib/firebase';
 
 
-    (file:File): Promise<string> =>
+
+
+export default function Admin() {
+  // const modules = useMemo(
+  //   () => ({
+  //     history: { delay: 2500, userOnly: true },
+  //     imageResize: {
+  //       displaySize: true // default false
+  //     },
+  //   }),
+  //   []
+  // );
+  const handleImageUpload = useCallback(
+
+
+    (file: File): Promise<string> =>
       new Promise((resolve, reject) => {
-  
+
         var postImage = storage.child('images/post.jpg');
-  
+
         const formData = new FormData();
         formData.append('image', file);
-  
-        //postImage.put(file).then((result)=> console.log(result)).then((Response)=> resolve(Response))
-        
-        fetch('https://api.imgbb.com/1/upload?key=api_key', {
-          method: 'POST',
-          body: formData,
-        })
-          .then((response) => response.json())
-          .then((result) => resolve(result.data.url))
-          .catch(() => reject(new Error('Upload failed')));
-       }
+
+        postImage.put(file)
+          .then((result) =>
+            (result.ref.getDownloadURL().then((x) => resolve(x))))
+          .then((Response) => console.log(Response))
+          .catch((e) => console.log(e))
+
+
+      }
       ),
     []
   );
-  
-
-export default function Admin() {
-    const initialValue = '<h1>hello,</h1><p>my name is <em>anan </em><strong><em>saadi</em></strong></p>';
-    const [value, onChange] = useState(initialValue);
+  const initialValue = '<h1>Hello,</h1><p>my name is <em>anan </em><strong><em>saadi</em></strong></p>';
+  const [value, onChange] = useState(initialValue);
+  const [title, setValue] = useState('');
 
 
-    return (
-        <>
-            <RichTextEditor value={value} onChange={onChange} />
-            <Button onClick={() => console.log(value)} />
-        </>
 
-    );
+  return (
+    <Stack>
+      <Space h={10} />
+      <Container>
+        <TextInput
+          value={title}
+          onChange={
+            (event) => setValue(event.currentTarget.value)
+          }
+          placeholder="Title"
+          label="Title"
+          withAsterisk
+        />
+      </Container>
+      <RichTextEditor value={value} onChange={onChange} onImageUpload={handleImageUpload} />
+
+
+      <Container>
+        <Button onClick={()=>uploadPost(title, value)} >click me</Button>
+      </Container>
+
+    </Stack>
+
+  );
 
 }
 

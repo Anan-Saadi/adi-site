@@ -32,7 +32,7 @@ function card(imageSrc: string, title: string, summery: string, Id: string) {
 
         <Grid.Col span={span} onClick={() => { console.log("clicked"); }}>
             <Center>
-                <Link href={{ pathname: Id, query: { title: title, text: summery } }}>
+                <Link  href={{ pathname: Id, query: { title: title, text: summery } }}>
 
                     <Card radius="lg" withBorder>
 
@@ -53,9 +53,9 @@ function card(imageSrc: string, title: string, summery: string, Id: string) {
                         <CardSection>
                             <Center>
                                 <Container>
-                                    <Text color="dimmed" size="lg" >
+                                    {/* <Text color="dimmed" size="lg" >
                                         {summery}
-                                    </Text>
+                                    </Text> */}
                                 </Container>
 
                             </Center>
@@ -78,8 +78,10 @@ function card(imageSrc: string, title: string, summery: string, Id: string) {
     );
 }
 export async function getStaticProps() {
+    console.log("run");
     // Call an external API endpoint to get posts
     const posts = (await getAllPosts());
+    console.log(posts)
 
     // By returning { props: { posts } }, the Blog component
     // will receive `posts` as a prop at build time
