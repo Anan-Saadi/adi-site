@@ -9,9 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppShell
       padding={-10}
       header={ <HeaderResponsive links={[
-        {link:"About", label:"About"},
+        {link:"About", label:"About", },
         {link:"Designs", label:"Designs"},
-        {link:"Art", label:"Art"},
         {link:"Contact", label:"Contact"}]}></HeaderResponsive>}>
               
             

@@ -1,6 +1,7 @@
 import RichTextEditor from '../../components/RichText';
 
-
+import Quill from 'quill';
+import ImageResize from 'quill-image-resize-module';
 
 
 
@@ -14,15 +15,16 @@ import { storage, uploadPost } from '../../lib/firebase';
 
 
 export default function Admin() {
-  // const modules = useMemo(
-  //   () => ({
-  //     history: { delay: 2500, userOnly: true },
-  //     imageResize: {
-  //       displaySize: true // default false
-  //     },
-  //   }),
-  //   []
-  // );
+
+  const modules = useMemo(
+    () => ({
+      ImageResize: {
+        // ...
+        
+    }
+    }),
+    []
+  );
   const handleImageUpload = useCallback(
 
 
@@ -45,7 +47,7 @@ export default function Admin() {
       ),
     []
   );
-  const initialValue = '<h1>Hello,</h1><p>my name is <em>anan </em><strong><em>saadi</em></strong></p>';
+  const initialValue = '';
   const [value, onChange] = useState(initialValue);
   const [title, setValue] = useState('');
 
@@ -65,7 +67,7 @@ export default function Admin() {
           withAsterisk
         />
       </Container>
-      <RichTextEditor value={value} onChange={onChange} onImageUpload={handleImageUpload} />
+      <RichTextEditor value={value} onChange={onChange} onImageUpload={handleImageUpload}/>
 
 
       <Container>

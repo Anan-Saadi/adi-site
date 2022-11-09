@@ -6,13 +6,15 @@ import { getAllPosts } from "../lib/firebase";
 
 export default function Desgins({ posts }: any) {
 
+    const media:boolean = useMediaQuery('(min-width: 900px)');
+
 
     return (
         <Stack>
             <Space h={30} />
             <Grid justify="center" gutter={0}>
                 {
-                    posts.map((post: any) => card("esign.jpg", post.title, post.text, post.title))
+                    posts.map((post: any) => card("esign.jpg", post.title, post.text, post.title, media))
                 }
 
 
@@ -25,8 +27,8 @@ export default function Desgins({ posts }: any) {
 }
 
 
-function card(imageSrc: string, title: string, summery: string, Id: string) {
-    const span: number = useMediaQuery('(min-width: 900px)') ? 4 : 10;
+function card(imageSrc: string, title: string, summery: string, Id: string, media:boolean) {
+    const span: number = media ? 4 : 10;
 
     return (
 
